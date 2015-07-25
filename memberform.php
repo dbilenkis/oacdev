@@ -7,6 +7,7 @@ Version: 1.0
 Authors: 
 */
 
+defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
 
 function add_lookup_form() {
     echo "<form action='".get_admin_url()."admin-post.php' method='post'>";
