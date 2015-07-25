@@ -17,9 +17,20 @@ if(!class_exists('OAC_Member_Search'))
 
     public function __construct()
         {
-            // register actions
-        } // END public function __construct
+        // register actions
+	add_action('admin_init', array(&$this, 'admin_init'));
+	add_action('admin_menu', array(&$this, 'add_menu'));
+        
+	} // END public function __construct
     
+    public function admin_init()
+    {  
+    // Set up the settings for this plugin
+    $this->init_settings();
+    // Possibly do additional admin_init tasks
+    } // END public static function activate
+
+
     public function add_lookup_form() {
       	echo "<form action='".get_admin_url()."admin-post.php' method='post'>";
       	//   echo '<form action="' . esc_url( $_SERVER['REQUEST_URI'] ) . '" method="post">';
