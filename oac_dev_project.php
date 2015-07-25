@@ -9,26 +9,44 @@ Authors: Dina
 
 defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
 
-function add_lookup_form() {
-    echo "<form action='".get_admin_url()."admin-post.php' method='post'>";
- //   echo '<form action="' . esc_url( $_SERVER['REQUEST_URI'] ) . '" method="post">';
-    echo '<p>';
-    echo 'Email ';
-    echo '<input type="email" name="cf-email" value="' . ( isset( $_POST["cf-email"] ) ? esc_attr( $_POST["cf-email"] ) : '' ) . '" size="40" />';
-    echo '</p>';
-    echo '<p><input type="submit" name="cf-submitted" value="Send"/></p>';
-    echo '</form>';
-}
+if(!class_exists('OAC_Member_Search'))
+{
 
-register_activation_hook( __FILE__, 'oacmembership_pn_activation' );
-register_deactivation_hook( __FILE__, 'oacmembership_pn_deactivate' );
+  class OAC_Member_Search
+  {
 
-function oacmembership_pn_activation () {
-// does nothing at this time
-}
+    public function __construct()
+        {
+            // register actions
+        } // END public function __construct
+    
+    public function add_lookup_form() {
+      	echo "<form action='".get_admin_url()."admin-post.php' method='post'>";
+      	//   echo '<form action="' . esc_url( $_SERVER['REQUEST_URI'] ) . '" method="post">';
+      	echo '<p>';
+    	echo 'Email ';
+    	echo '<input type="email" name="cf-email" value="' . ( isset( $_POST["cf-email"] ) ? esc_attr( $_POST["cf-email"] ) : '' ) . '" size="40" />';
+    	echo '</p>';
+    	echo '<p><input type="submit" name="cf-submitted" value="Send"/></p>';
+    	echo '</form>';
+    }   
 
-function oacmembership_pn_deactivate () {
-// does nothing for now
-}
+    public function oacmembership_pn_activation () {
+	// does nothing at this time
+    }
+
+    public function oacmembership_pn_deactivate () {
+	// does nothing for now
+    }
+  } // end of class OAC_Member_Search  
+
+  // Installation and uninstallation hooks
+  register_activation_hook( __FILE__, 'oacmembership_pn_activation' );
+  register_deactivation_hook( __FILE__, 'oacmembership_pn_deactivate' );
+
+  // Instantiate the OAC_Member_Search class
+  $wp_oac_member_search = new OAC_Member_Search();
+
+} // end of if class exists
 
 ?>
