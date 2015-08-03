@@ -9,6 +9,14 @@ Authors: Dina
 
 defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
 
+// admin functions for creating admin menu
+
+function oacmembsearch_admin_actions() {
+	add_options_page("Member Search Options","Member Search Options",1,"Member Search Options",oacmembsearch_admin);
+}
+
+add_action('admin_menu','oacmembsearch_admin_actions');
+
 if(!class_exists('OAC_Member_Search'))
 {
 
@@ -23,14 +31,6 @@ if(!class_exists('OAC_Member_Search'))
         
 	} // END public function __construct
     
-    public function admin_init()
-    {  
-    // Set up the settings for this plugin
-    $this->init_settings();
-    // Possibly do additional admin_init tasks
-    } // END public static function activate
-
-
     public function add_lookup_form() {
       	echo "<form action='".get_admin_url()."admin-post.php' method='post'>";
       	//   echo '<form action="' . esc_url( $_SERVER['REQUEST_URI'] ) . '" method="post">';
